@@ -22,6 +22,14 @@ class NormalDistribution(ProbabilityDistribution):
         self.mean = sum(self.data) / len(self.data)
         return self.mean
 
+    def get_population_size(self, is_sample: bool = True) -> int:
+        """ Method to retrieve the sample or population size N.
+        """
+        n = len(self.data)
+        if is_sample:
+            n = n - 1
+        return n
+
     def calculate_variance(self, is_sample=True):
         """ Method that computes the variance of the normal distribution based
         on the data attribute.
@@ -34,9 +42,7 @@ class NormalDistribution(ProbabilityDistribution):
         """
         mu = self.calculate_mean()
 
-        n = len(self.data)
-        if is_sample:
-            n = n - 1
+        n = self.get_population_size(is_sample=is_sample)
 
         self.variance = (sum([(xi - mu) ** 2 for xi in self.data])) / n
 
@@ -46,9 +52,8 @@ class NormalDistribution(ProbabilityDistribution):
         """ Method that computes the standard deviation of the normal 
         distribution based on the data attribute.
         """
-        n = len(self.data)
-        if is_sample:
-            n = n - 1
         var = self.calculate_variance(is_sample=is_sample)
+
         self.stdev = np.sqrt(var)
         return self.stdev
+
