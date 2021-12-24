@@ -17,5 +17,5 @@ class TestReadDataFile(unittest.TestCase):
     def testNormalDistributionMeanCalculation(self):
         pds = NormalDistribution()
         pds.read_data_from_text_file(filename=generic_test_cases_file)
-        mu = pds.compute_mean()
+        mu = pds.calculate_mean()
         self.assertEqual(mu, 58.5, msg='The mean does not compute correctly')
