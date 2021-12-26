@@ -7,6 +7,7 @@ from NormalDistribution import NormalDistribution
 generic_test_cases_file = '/Users/georgiosspyrou/Desktop/GitHub/pydistr/input_files/normal_data.txt'
 
 
+# Read File Unit Tests
 class TestReadDataFile(unittest.TestCase):
 
     def testDataFileReadCorrectly(self):
@@ -14,6 +15,9 @@ class TestReadDataFile(unittest.TestCase):
         pds.read_data_from_text_file(filename=generic_test_cases_file)
         self.assertEqual(sum(pds.data), 1170.0, msg='Counts do not match')
 
+
+# Normal Distribution Unit Tests
+class TestNormalDistribution(unittest.TestCase):
     def testNormalDistrMeanCalculation(self):
         pds = NormalDistribution()
         pds.read_data_from_text_file(filename=generic_test_cases_file)
