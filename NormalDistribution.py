@@ -1,5 +1,7 @@
 
 import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
 from GenericDistribution import ProbabilityDistribution
 
 
@@ -20,6 +22,7 @@ class NormalDistribution(ProbabilityDistribution):
             mu = sum(xi) / N, where xi are the data points in data attribute
         """
         self.mean = sum(self.data) / len(self.data)
+
         return self.mean
 
     def get_population_size(self, is_sample: bool = True) -> int:
@@ -28,6 +31,7 @@ class NormalDistribution(ProbabilityDistribution):
         n = len(self.data)
         if is_sample:
             n = n - 1
+
         return n
 
     def calculate_variance(self, is_sample=True):
@@ -41,19 +45,25 @@ class NormalDistribution(ProbabilityDistribution):
                 mu: is the mean of the distribution
         """
         mu = self.calculate_mean()
-
         n = self.get_population_size(is_sample=is_sample)
-
         self.variance = (sum([(xi - mu) ** 2 for xi in self.data])) / n
 
         return self.variance
 
     def calculate_std(self, is_sample=True):
-        """ Method that computes the standard deviation of the normal 
+        """ Method that computes the standard deviation of the normal
         distribution based on the data attribute.
         """
         var = self.calculate_variance(is_sample=is_sample)
-
         self.stdev = np.sqrt(var)
+
         return self.stdev
 
+    def plot_histogram(self, n_bins: int = 10):
+        """ Output a histogram of the data attribute.
+        """
+        plt.hist(self.data, n_bins=10)
+        plt.title('Histogram of Data')
+        plt.xlabel('data')
+        plt.ylabel('count')
+        plt.show()
