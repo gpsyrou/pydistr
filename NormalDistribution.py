@@ -1,4 +1,5 @@
 
+import math
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -59,11 +60,30 @@ class NormalDistribution(ProbabilityDistribution):
 
         return self.stdev
 
+    def compute_pdf(self, x: float) -> float:
+        """ Calculate the probability density function for the normal
+        distribution, based on the following formula:
+             (1/s*sqrt(2*pi)) * exp(-(x-m / s)^2) / 2)
+
+        Args
+        ----
+            x: Point for calculating the pdf
+
+        Returns
+        -------
+            pdf: Probability density function (PDF) for point x
+        """
+        calc_one = 1.0 / (self.stdev * (math.sqrt(2 * math.pi)))
+        calc_two = math.exp((-0.5*((x - self.mean) / self.stdev) ** 2))
+        pdf = calc_one * calc_two
+
+        return pdf
+
     def plot_histogram(self, n_bins: int = 10):
         """ Output a histogram of the data attribute.
         """
-        plt.hist(self.data, n_bins=10)
-        plt.title('Histogram of Data')
-        plt.xlabel('data')
-        plt.ylabel('count')
+        ax = sns.distplot(a=self.data, bins=n_bins, norm_hist=False)
+        ax.set_title('Histogram of Data')
+        ax.set_xlabel('Data')
+        ax.set_ylabel('Count')
         plt.show()
