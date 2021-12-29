@@ -55,3 +55,14 @@ class TestNormalDistribution(unittest.TestCase):
             26.498,
             msg='The stdv for sample is not computed correctly'
         )
+
+    def testPDFPointCalculation(self):
+        pds = NormalDistribution()
+        pds.read_data_from_text_file(filename=generic_test_cases_file)
+        pds.calculate_mean()
+        pds.calculate_std()
+        self.assertEqual(
+            np.round(pds.compute_pdf(10), 4),
+            0.0028,
+            msg='PDF point calculation is not computed correctly'
+        )
