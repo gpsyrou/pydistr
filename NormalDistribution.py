@@ -7,7 +7,7 @@ from GenericDistribution import ProbabilityDistribution
 
 
 class NormalDistribution(ProbabilityDistribution):
-    """ Distribution class for calculating and visualizing a Gaussian 
+    """ Distribution class for calculating and visualizing a Gaussian
     probability distribution.
     """
     def __init__(self, mu: float = 0.0, sigma: float = 1.0):
@@ -87,3 +87,12 @@ class NormalDistribution(ProbabilityDistribution):
         ax.set_xlabel('Data')
         ax.set_ylabel('Count')
         plt.show()
+
+    def __repr__(self):
+        """ Method to return the characteristics of a Gaussian distribution
+        instance. Currently the method outputs:
+            1) mean
+            2) variance
+            3) standard deviation
+        """
+        return 'Mean: {0} \nVariance: {1} \nStandard Deviation: {2}'.format(self.mean, self.variance, self.stdev)
