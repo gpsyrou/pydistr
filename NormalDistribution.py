@@ -26,15 +26,6 @@ class NormalDistribution(ProbabilityDistribution):
 
         return self.mean
 
-    def get_population_size(self, is_sample: bool = True) -> int:
-        """ Method to retrieve the sample or population size N.
-        """
-        n = len(self.data)
-        if is_sample:
-            n = n - 1
-
-        return n
-
     def calculate_variance(self, is_sample=True):
         """ Method that computes the variance of the normal distribution based
         on the data attribute.

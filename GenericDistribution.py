@@ -32,3 +32,12 @@ class ProbabilityDistribution:
             for line in file:
                 self.data.append(float(line))
         file.close()
+
+    def get_population_size(self, is_sample: bool = True) -> int:
+        """ Method to retrieve the sample or population size N.
+        """
+        n = len(self.data)
+        if is_sample:
+            n = n - 1
+
+        return n
