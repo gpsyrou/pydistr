@@ -10,11 +10,11 @@ class NormalDistribution(ProbabilityDistribution):
     """ Distribution class for calculating and visualizing a Gaussian
     probability distribution.
     """
-    def __init__(self, mu: float = 0.0, sigma: float = 1.0):
+    def __init__(self, mu: float = 0.0, var: float = 1.0, sigma: float = 1.0):
         """ The generic distribution has mean of 0 and variance/std of 1,
         indicating a standard normal distribution.
         """
-        ProbabilityDistribution.__init__(self, mu, sigma)
+        ProbabilityDistribution.__init__(self, mu, var, sigma)
 
     def calculate_mean(self):
         """ Method that computes the mean of the normal distribution based

@@ -7,12 +7,14 @@ class ProbabilityDistribution:
     Attributes
     ----------
         mean: Mean value of the distribution
+        variance: Variance of the distribution
         stdev: Standard deviation of the distribution
         data_list: Input values for the distribution, as read from a text file
         """
 
-    def __init__(self, mu: float = 0.0, sigma: float = 1.0):
+    def __init__(self, mu: float = 0.0, var: float = 1.0, sigma: float = 1.0):
         self.mean = mu
+        self.variance = var
         self.stdev = sigma
         self.data = []
 
