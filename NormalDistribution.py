@@ -114,7 +114,7 @@ class NormalDistribution(ProbabilityDistribution):
         for i in range(n_spaces):
             point_x = min_range + interval*i
             points.append(point_x)
-            pdf_values.append(self.pdf(point_x))
+            pdf_values.append(self.compute_pdf(point_x))
 
         fig, axes = plt.subplots(2, sharex=True)
         fig.subplots_adjust(hspace=.5)
@@ -124,6 +124,7 @@ class NormalDistribution(ProbabilityDistribution):
         axes[1].plot(points, pdf_values)
         axes[1].set_title('Normal Distribution for \n Sample Mean and Sample Standard Deviation')
         axes[0].set_ylabel('Density')
+        plt.savefig("pdf_plot.png")
         plt.show()
 
         return points, pdf_values

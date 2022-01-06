@@ -13,7 +13,7 @@ class TestReadDataFile(unittest.TestCase):
     def testDataFileReadCorrectly(self):
         pds = ProbabilityDistribution()
         pds.read_data_from_text_file(filename=generic_test_cases_file)
-        self.assertEqual(sum(pds.data), 1170.0, msg='Counts do not match')
+        self.assertEqual(np.round(np.sum(pds.data), 3), 2.88, msg='Counts do not match')
 
 
 # Normal Distribution Unit Tests
@@ -22,7 +22,8 @@ class TestNormalDistribution(unittest.TestCase):
         pds = NormalDistribution()
         pds.read_data_from_text_file(filename=generic_test_cases_file)
         mu = pds.calculate_mean()
-        self.assertEqual(mu, 58.5, msg='The mean does not compute correctly')
+        mu = np.round(mu, 4)
+        self.assertEqual(mu, 0.0029, msg='The mean does not compute correctly')
 
     def testNormalDistrVarianceCalculation(self):
         pds = NormalDistribution()
@@ -30,13 +31,13 @@ class TestNormalDistribution(unittest.TestCase):
         var_pop = pds.calculate_variance(is_sample=False)
         var_sample = pds.calculate_variance(is_sample=True)
         self.assertEqual(
-            np.round(var_pop, 3),
-            667.05,
+            np.round(var_pop, 4),
+            0.9988,
             msg='The variance for population is not computed correctly'
         )
         self.assertEqual(
-            np.round(var_sample, 3),
-            702.158,
+            np.round(var_sample, 4),
+            0.9998,
             msg='The variance for sample is not computed correctly'
         )
 
@@ -46,13 +47,13 @@ class TestNormalDistribution(unittest.TestCase):
         std_pop = pds.calculate_std(is_sample=False)
         std_sample = pds.calculate_std(is_sample=True)
         self.assertEqual(
-            np.round(std_pop, 3),
-            25.827,
+            np.round(std_pop, 4),
+            0.9994,
             msg='The stdv for population is not computed correctly'
         )
         self.assertEqual(
-            np.round(std_sample, 3),
-            26.498,
+            np.round(std_sample, 4),
+            0.9999,
             msg='The stdv for sample is not computed correctly'
         )
 
@@ -61,8 +62,9 @@ class TestNormalDistribution(unittest.TestCase):
         pds.read_data_from_text_file(filename=generic_test_cases_file)
         pds.calculate_mean()
         pds.calculate_std()
+        val = pds.compute_pdf(10)
         self.assertEqual(
-            np.round(pds.compute_pdf(10), 4),
-            0.0028,
+            np.round(val*(10**19), 6),
+            0.000784,
             msg='PDF point calculation is not computed correctly'
         )
