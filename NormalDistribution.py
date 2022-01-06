@@ -125,6 +125,6 @@ class NormalDistribution(ProbabilityDistribution):
         axes[1].set_title('Normal Distribution for \n Sample Mean and Sample Standard Deviation')
         axes[0].set_ylabel('Density')
         plt.savefig("pdf_plot.png")
-        plt.show()
+        #plt.show()
 
         return points, pdf_values
