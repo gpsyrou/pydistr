@@ -86,4 +86,44 @@ class NormalDistribution(ProbabilityDistribution):
             2) variance
             3) standard deviation
         """
-        return 'Mean: {0} \nVariance: {1} \nStandard Deviation: {2}'.format(self.mean, self.variance, self.stdev)
+        return 'Mean: {0} \nVariance: {1} \nStandard Deviation: {2}'.format(
+            self.mean, self.variance, self.stdev
+            )
+
+    def plot_histogram_pdf(self, n_spaces=50):
+
+        """Function to plot the normalized histogram of the data and a plot of the
+        probability density function along the same range
+
+        Args:
+            n_spaces (int): number of data points
+
+        Returns:
+            list: x values for the pdf plot
+            list: y values for the pdf plot
+        """
+
+        min_range = min(self.data)
+        max_range = max(self.data)
+
+        interval = 1.0 * (max_range - min_range) / n_spaces
+
+        points = []
+        pdf_values = []
+
+        for i in range(n_spaces):
+            point_x = min_range + interval*i
+            points.append(point_x)
+            pdf_values.append(self.pdf(point_x))
+
+        fig, axes = plt.subplots(2, sharex=True)
+        fig.subplots_adjust(hspace=.5)
+        axes[0].hist(self.data, density=True)
+        axes[0].set_title('Normed Histogram of Data')
+        axes[0].set_ylabel('Density')
+        axes[1].plot(points, pdf_values)
+        axes[1].set_title('Normal Distribution for \n Sample Mean and Sample Standard Deviation')
+        axes[0].set_ylabel('Density')
+        plt.show()
+
+        return points, pdf_values
