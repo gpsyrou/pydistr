@@ -7,12 +7,14 @@ class ProbabilityDistribution:
     Attributes
     ----------
         mean: Mean value of the distribution
+        variance: Variance of the distribution
         stdev: Standard deviation of the distribution
         data_list: Input values for the distribution, as read from a text file
         """
 
-    def __init__(self, mu: float = 0.0, sigma: float = 1.0):
+    def __init__(self, mu: float = 0.0, var: float = 1.0, sigma: float = 1.0):
         self.mean = mu
+        self.variance = var
         self.stdev = sigma
         self.data = []
 
@@ -30,3 +32,12 @@ class ProbabilityDistribution:
             for line in file:
                 self.data.append(float(line))
         file.close()
+
+    def get_population_size(self, is_sample: bool = True) -> int:
+        """ Method to retrieve the sample or population size N.
+        """
+        n = len(self.data)
+        if is_sample:
+            n = n - 1
+
+        return n
