@@ -47,7 +47,7 @@ class NormalDistribution(ProbabilityDistribution):
         distribution based on the data attribute.
         """
         var = self.calculate_variance(is_sample=is_sample)
-        self.stdev = np.sqrt(var)
+        self.stdev = math.sqrt(var)
 
         return self.stdev
 

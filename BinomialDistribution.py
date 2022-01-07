@@ -44,6 +44,6 @@ class BinomialDistribution(ProbabilityDistribution):
             stdev = sqrt(n * p * (1-p))
         """
         variance = self.calculate_variance()
-        self.stdev = np.sqrt(variance)
+        self.stdev = math.sqrt(variance)
 
         return self.stdev
