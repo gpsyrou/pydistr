@@ -78,7 +78,24 @@ class TestNormalDistribution(unittest.TestCase):
 class TestBinomialDistribution(unittest.TestCase):
     def testBinomialDistrMeanCalculation(self):
         pds = BinomialDistribution()
-        pds.read_data_from_text_file(filename=binomial_tests_file)
         mu = pds.calculate_mean()
-        mu = np.round(mu, 4)
         self.assertEqual(mu, 10.0, msg='The mean does not compute correctly')
+
+    def testBinomialDistrVarianceCalculation(self):
+        pds = BinomialDistribution()
+        var = pds.calculate_variance()
+        self.assertEqual(
+            var,
+            5.0,
+            msg='The variance is not computed correctly'
+            )
+
+    def testBinomialDistrStdCalculation(self):
+        pds = BinomialDistribution()
+        std = pds.calculate_std()
+        std = np.round(std, 4)
+        self.assertEqual(
+            std,
+            2.2361,
+            msg='The standard deviation is not computed correctly'
+            )
