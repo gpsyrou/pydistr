@@ -3,31 +3,36 @@ import unittest
 import numpy as np
 from GenericDistribution import ProbabilityDistribution
 from NormalDistribution import NormalDistribution
+from BinomialDistribution import BinomialDistribution
 
-generic_test_cases_file = '/Users/georgiosspyrou/Desktop/GitHub/pydistr/input_files/normal_data.txt'
+normal_tests_file = '/Users/georgiosspyrou/Desktop/GitHub/pydistr/input_files/normal_data.txt'
+binomial_tests_file = '/Users/georgiosspyrou/Desktop/GitHub/pydistr/input_files/binomial_data.txt'
 
 
-# Read File Unit Tests
 class TestReadDataFile(unittest.TestCase):
 
     def testDataFileReadCorrectly(self):
         pds = ProbabilityDistribution()
-        pds.read_data_from_text_file(filename=generic_test_cases_file)
-        self.assertEqual(np.round(np.sum(pds.data), 3), 2.88, msg='Counts do not match')
+        pds.read_data_from_text_file(filename=normal_tests_file)
+        self.assertEqual(
+            np.round(np.sum(pds.data), 3),
+            2.88,
+            msg='Counts do not match'
+            )
 
 
 # Normal Distribution Unit Tests
 class TestNormalDistribution(unittest.TestCase):
     def testNormalDistrMeanCalculation(self):
         pds = NormalDistribution()
-        pds.read_data_from_text_file(filename=generic_test_cases_file)
+        pds.read_data_from_text_file(filename=normal_tests_file)
         mu = pds.calculate_mean()
         mu = np.round(mu, 4)
         self.assertEqual(mu, 0.0029, msg='The mean does not compute correctly')
 
     def testNormalDistrVarianceCalculation(self):
         pds = NormalDistribution()
-        pds.read_data_from_text_file(filename=generic_test_cases_file)
+        pds.read_data_from_text_file(filename=normal_tests_file)
         var_pop = pds.calculate_variance(is_sample=False)
         var_sample = pds.calculate_variance(is_sample=True)
         self.assertEqual(
@@ -43,7 +48,7 @@ class TestNormalDistribution(unittest.TestCase):
 
     def testNormalDistrStdCalculation(self):
         pds = NormalDistribution()
-        pds.read_data_from_text_file(filename=generic_test_cases_file)
+        pds.read_data_from_text_file(filename=normal_tests_file)
         std_pop = pds.calculate_std(is_sample=False)
         std_sample = pds.calculate_std(is_sample=True)
         self.assertEqual(
@@ -59,7 +64,7 @@ class TestNormalDistribution(unittest.TestCase):
 
     def testPDFPointCalculation(self):
         pds = NormalDistribution()
-        pds.read_data_from_text_file(filename=generic_test_cases_file)
+        pds.read_data_from_text_file(filename=normal_tests_file)
         pds.calculate_mean()
         pds.calculate_std()
         val = pds.compute_pdf(10)
@@ -68,3 +73,12 @@ class TestNormalDistribution(unittest.TestCase):
             0.000784,
             msg='PDF point calculation is not computed correctly'
         )
+
+
+class TestBinomialDistribution(unittest.TestCase):
+    def testBinomialDistrMeanCalculation(self):
+        pds = BinomialDistribution()
+        pds.read_data_from_text_file(filename=binomial_tests_file)
+        mu = pds.calculate_mean()
+        mu = np.round(mu, 4)
+        self.assertEqual(mu, 10.0, msg='The mean does not compute correctly')
