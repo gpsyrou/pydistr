@@ -1,8 +1,5 @@
 
 import math
-import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
 from GenericDistribution import ProbabilityDistribution
 
 
@@ -21,7 +18,11 @@ class BinomialDistribution(ProbabilityDistribution):
         self.p = prob
         self.n = n_trials
 
-        ProbabilityDistribution.__init__(self, mu=self.calculate_mean(), sigma=self.calculate_std())
+        ProbabilityDistribution.__init__(
+            self,
+            mu=self.calculate_mean(),
+            sigma=self.calculate_std()
+            )
 
     def calculate_mean(self):
         """ Compute the mean for a binomial distribution:

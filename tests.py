@@ -1,12 +1,15 @@
 
+from pathlib import Path
 import unittest
 import numpy as np
 from GenericDistribution import ProbabilityDistribution
 from NormalDistribution import NormalDistribution
 from BinomialDistribution import BinomialDistribution
 
-normal_tests_file = '/Users/georgiosspyrou/Desktop/GitHub/pydistr/input_files/normal_data.txt'
-binomial_tests_file = '/Users/georgiosspyrou/Desktop/GitHub/pydistr/input_files/binomial_data.txt'
+PROJECT_PATH = Path('/Users/georgiosspyrou/Desktop/GitHub/pydistr')
+FILES_PATH = Path('input_files')
+normal_tests_file = PROJECT_PATH / FILES_PATH / Path('normal_data.txt')
+binomial_tests_file = PROJECT_PATH / FILES_PATH / Path('binomial_data.txt')
 
 
 class TestReadDataFile(unittest.TestCase):
