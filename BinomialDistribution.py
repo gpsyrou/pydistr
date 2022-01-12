@@ -48,3 +48,7 @@ class BinomialDistribution(ProbabilityDistribution):
         self.stdev = math.sqrt(variance)
 
         return self.stdev
+
+    def compute_pmf(self, num_successes: int = 2) -> float:
+        pmf = None
+        return pmf
