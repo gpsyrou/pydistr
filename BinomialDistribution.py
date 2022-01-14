@@ -1,5 +1,6 @@
 
 import math
+from scipy.special import comb
 from GenericDistribution import ProbabilityDistribution
 
 
@@ -49,6 +50,15 @@ class BinomialDistribution(ProbabilityDistribution):
 
         return self.stdev
 
-    def compute_pmf(self, num_successes: int = 2) -> float:
-        pmf = None
-        return pmf
+    def compute_pmf(self, k: int = 2) -> float:
+        """ Method to compute the Probability Mass Function for a binomial
+        distribution, given a "k" number of successes.
+        """
+        self.k = k
+        cmb = comb(self.n, self.k)
+        s_rate = self.p ** self.k
+        f_rate = (1 - self.p) ** (self.n - self.k)
+
+        self.pmf = cmb * s_rate * f_rate
+
+        return self.pmf
