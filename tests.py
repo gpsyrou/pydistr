@@ -102,3 +102,12 @@ class TestBinomialDistribution(unittest.TestCase):
             2.2361,
             msg='The standard deviation is not computed correctly'
             )
+
+    def testPDFPointCalculation(self):
+        pds = BinomialDistribution()
+        val = pds.compute_pmf(k=2)
+        self.assertEqual(
+            np.round(val, 7),
+            0.0001812,
+            msg='PMF point calculation is not computed correctly'
+        )
