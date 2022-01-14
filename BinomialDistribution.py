@@ -1,0 +1,64 @@
+
+import math
+from scipy.special import comb
+from GenericDistribution import ProbabilityDistribution
+
+
+class BinomialDistribution(ProbabilityDistribution):
+    """ Binomial distribution class the performs computations
+    and visualization for a binomial distribution.
+    Attributes:
+    -----------
+        n: number of trials
+        p: probability of an event occuring
+        mean: describes the mean value of the distribution
+        variance: describes the variance of the distribution
+        stdev: described the standard deviation of the distribution
+    """
+    def __init__(self, prob: float = 0.5, n_trials: int = 20):
+        self.p = prob
+        self.n = n_trials
+
+        ProbabilityDistribution.__init__(
+            self,
+            mu=self.calculate_mean(),
+            sigma=self.calculate_std()
+            )
+
+    def calculate_mean(self):
+        """ Compute the mean for a binomial distribution:
+            mu = n * p
+        """
+        self.mean = self.n * self.p
+
+        return self.mean
+
+    def calculate_variance(self):
+        """ Compute the variance for a binomial distribution:
+            variance = n * p * (1-p)
+        """
+        self.variance = self.n * self.p * (1-self.p)
+
+        return self.variance
+
+    def calculate_std(self):
+        """ Compute the variance for a binomial distribution:
+            stdev = sqrt(n * p * (1-p))
+        """
+        variance = self.calculate_variance()
+        self.stdev = math.sqrt(variance)
+
+        return self.stdev
+
+    def compute_pmf(self, k: int = 2) -> float:
+        """ Method to compute the Probability Mass Function for a binomial
+        distribution, given a "k" number of successes.
+        """
+        self.k = k
+        cmb = comb(self.n, self.k)
+        s_rate = self.p ** self.k
+        f_rate = (1 - self.p) ** (self.n - self.k)
+
+        self.pmf = cmb * s_rate * f_rate
+
+        return self.pmf

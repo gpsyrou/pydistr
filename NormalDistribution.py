@@ -1,6 +1,5 @@
 
 import math
-import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 from GenericDistribution import ProbabilityDistribution
@@ -47,7 +46,7 @@ class NormalDistribution(ProbabilityDistribution):
         distribution based on the data attribute.
         """
         var = self.calculate_variance(is_sample=is_sample)
-        self.stdev = np.sqrt(var)
+        self.stdev = math.sqrt(var)
 
         return self.stdev
 
@@ -92,8 +91,8 @@ class NormalDistribution(ProbabilityDistribution):
 
     def plot_histogram_pdf(self, n_spaces=50):
 
-        """Function to plot the normalized histogram of the data and a plot of the
-        probability density function along the same range
+        """Function to plot the normalized histogram of the data and a plot of
+        the probability density function along the same range
 
         Args:
             n_spaces (int): number of data points
@@ -122,9 +121,9 @@ class NormalDistribution(ProbabilityDistribution):
         axes[0].set_title('Normed Histogram of Data')
         axes[0].set_ylabel('Density')
         axes[1].plot(points, pdf_values)
-        axes[1].set_title('Normal Distribution for \n Sample Mean and Sample Standard Deviation')
+        axes[1].set_title(
+            'Normal Distr. for \nSample Mean Sample & Standard Deviation')
         axes[0].set_ylabel('Density')
         plt.savefig("pdf_plot.png")
-        #plt.show()
 
         return points, pdf_values
